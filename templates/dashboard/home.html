@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <div class="card border-0 shadow-sm">
+      <div class="card-body p-4">
+        <h1 class="h3 card-title mb-4">Welcome, {{ user.first_name|default:user.username }}!</h1>
+        <dl class="row mb-4">
+          <dt class="col-sm-4">Role</dt><dd class="col-sm-8">{{ user.get_role_display }}</dd>
+          <dt class="col-sm-4">Course</dt><dd class="col-sm-8">{{ user.course|default:"Not set" }}</dd>
+          <dt class="col-sm-4">Members</dt><dd class="col-sm-8">{{ member_count }}</dd>
+          <dt class="col-sm-4">Last login</dt><dd class="col-sm-8">{{ user.last_login|date:"M d, Y" }}</dd>
+        </dl>
+        <a class="btn btn-primary" href="{% url 'profile' %}">Edit profile</a>
+        {% if is_admin %}
+        <a class="btn btn-outline-primary ms-2" href="{% url 'admin_panel' %}">Open admin panel</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
